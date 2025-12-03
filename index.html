@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Plant Green House</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ============== LOGIN ============== -->
+  <div id="loginForm" class="page login-page">
+    <div class="login-shell">
+
+      <section class="login-left">
+        <div class="login-brand">
+          <span class="logo-mark">&#127793;</span>
+          <span class="logo-text">Smart Plant Green House</span>
+        </div>
+
+        <h1 class="login-heading">Welcome</h1>
+        <p class="login-sub">
+          Silakan login untuk mengakses panel monitoring.
+        </p>
+
+        <form class="login-form" onsubmit="return false;">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Email: admin@mail.com" />
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Password: Admin123" />
+          <button id="loginBtn" type="button">Login</button>
+        </form>
+      </section>
+
+      <section class="login-right">
+        <img src="assets/plants.jpg" alt="plant background" class="bg-plant">
+        <div class="visual-layer">
+          <div class="visual-card">
+            <div class="visual-logo">&#127793;</div>
+            <p class="visual-title">Smart Plant</p>
+            <p class="visual-caption">
+              Monitoring kelembaban, cahaya, dan keamanan di satu layar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ============== DASHBOARD ============== -->
+  <div id="dashboard" class="page page-dashboard" style="display: none;">
+    <header class="dash-header">
+      <div class="dash-title">
+        <h1>Smart Plant Green House</h1>
+        <h2>Monitoring Kelembaban Tanah, Cahaya, &amp; Keamanan</h2>
+      </div>
+      <button id="logoutBtn" class="btn-ghost">Logout</button>
+    </header>
+  <main class="dash-main">
+  <section class="dash-hero">
+    <img src="assets/bg-cover2.jpg" alt="Greenhouse background" class="hero-bg">
+
+    <div class="hero-overlay">
+      <div class="metric-row">
+        <!-- KIRI: TINGKAT CAHAYA -->
+        <div class="metric-card metric-toggle" data-metric="light">
+          <div class="metric-icon">💡</div>
+          <div class="metric-title">Tingkat Cahaya</div>
+          <div class="metric-value">
+            <span id="lightLevel">0</span><span class="metric-unit">%</span>
+          </div>
+          <div class="metric-status" id="lightStatus">Redup</div>
+        </div>
+
+        <!-- TENGAH: KELEMBABAN TANAH -->
+        <div class="metric-card metric-toggle" data-metric="soil">
+          <div class="metric-icon">🌱</div>
+          <div class="metric-title">Kelembaban Tanah</div>
+          <div class="metric-value">
+            <span id="soilMoisture">0</span><span class="metric-unit">%</span>
+          </div>
+          <div class="metric-status" id="soilStatus">Kering</div>
+        </div>
+
+        <!-- KANAN: GERAKAN (PIR) -->
+        <div class="metric-card metric-toggle" data-metric="motion">
+          <div class="metric-icon">🏃</div>
+          <div class="metric-title">Gerakan (PIR)</div>
+          <div class="metric-value" id="motionText">Tidak Terdeteksi</div>
+          <div class="metric-status" id="motionStatus">Aman</div>
+        </div>
+
+        <!-- LINGKARAN BESAR YANG PINDAH-PINDAH -->
+        <div class="hero-circle" id="heroCircle">
+          <div class="hero-circle-inner">
+            <div class="circle-icon">🌱</div>
+            <div class="circle-label" id="heroLabel">Kelembaban Tanah</div>
+            <div class="circle-value" id="heroValue">
+              0<span class="metric-unit">%</span>
+            </div>
+            <div class="circle-chip" id="heroStatus">Kering</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ROW KARTU DI BAWAH-->
+    <section class="dash-grid">
+      <article class="dash-card">
+        <h3>Tanah &amp; Irigasi</h3>
+        <p>
+          Nilai kelembaban tanah digunakan untuk mengatur penyiraman otomatis
+          dan mencegah tanaman kekeringan.
+        </p>
+      </article>
+
+      <article class="dash-card">
+        <h3>Cahaya &amp; Pencahayaan</h3>
+        <p>
+          Tingkat cahaya membantu menentukan kapan lampu grow-light perlu
+          dinyalakan atau dimatikan.
+        </p>
+      </article>
+
+      <article class="dash-card">
+        <h3>Keamanan &amp; Gerakan</h3>
+        <p>
+          Sensor PIR memantau adanya gerakan hewan atau orang di sekitar
+          greenhouse untuk keamanan.
+        </p>
+      </article>
+    </section>
+  </main>
+
+
+    <footer class="dash-footer">
+      <p>
+        Smart Plant Green House &mdash; Dashboard monitoring berbasis
+        Firebase Realtime Database.
+      </p>
+    </footer>
+  </div>
+
+    <!-- ============== JS (Firebase + Logic) ============== -->
+    <script type="module">
+      // Import Firebase SDK 
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged        
+      } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        onValue
+      } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+      // Config project firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyDl1eKmOoJP3TVL9rcOa029Vy9njROPGXI",
+        authDomain: "smart-plant-green-house.firebaseapp.com",
+        projectId: "smart-plant-green-house",
+        storageBucket: "smart-plant-green-house.firebasestorage.app",
+        messagingSenderId: "978210883222",
+        appId: "1:978210883222:web:481a78ff79dba5257864b7",
+        databaseURL: "https://smart-plant-green-house-default-rtdb.asia-southeast1.firebasedatabase.app"
+      };
+
+      // Init Firebase
+      const app  = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db   = getDatabase(app);
+
+      const loginFormEl = document.getElementById("loginForm");
+      const dashboardEl = document.getElementById("dashboard");
+      const loginBtn    = document.getElementById("loginBtn");
+      const logoutBtn   = document.getElementById("logoutBtn");
+
+      // AUTO LOGIN DETECTOR
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          loginFormEl.style.display = "none";
+          dashboardEl.style.display = "block";
+          listenToSensors(); // load realtime data
+        } else {
+          loginFormEl.style.display = "flex";
+          dashboardEl.style.display = "none";
+        }
+      });
+
+      // ====== STATE & FUNGSI UNTUK LINGKARAN HERO ======
+      let currentMetric = "soil"; 
+      let soilVal = 0;
+      let soilStatus = "Kering";
+
+      let lightVal = 0;
+      let lightStatus = "Redup";
+
+      let motionVal = false;
+      let motionStatus = "Aman";
+
+      const heroCircle   = document.getElementById("heroCircle");
+      const heroValueEl  = document.getElementById("heroValue");
+      const heroLabelEl  = document.getElementById("heroLabel");
+      const heroStatusEl = document.getElementById("heroStatus");
+
+      function moveCircleTo(metric) {
+        if (!heroCircle) return;
+
+        if (metric === "light") {
+          heroCircle.style.left = "16%";
+        } else if (metric === "soil") {
+          heroCircle.style.left = "50%";
+        } else if (metric === "motion") {
+          heroCircle.style.left = "84%";
+        }
+      }
+
+      function refreshHeroByMetric() {
+        currentMetric = currentMetric || "soil";
+
+        document.querySelectorAll(".metric-toggle").forEach(card => {
+          card.classList.toggle("active", card.dataset.metric === currentMetric);
+        });
+
+        moveCircleTo(currentMetric);
+
+        if (!heroValueEl || !heroLabelEl || !heroStatusEl) return;
+
+        // AMBIL ELEMEN ICON DI LINGKARAN
+        const circleIconEl = document.querySelector(".circle-icon"); 
+
+        if (currentMetric === "soil") {
+          heroValueEl.innerHTML  = soilVal + '<span class="metric-unit">%</span>';
+          heroLabelEl.textContent  = "Kelembaban Tanah";
+          heroStatusEl.textContent = soilStatus;
+          if (circleIconEl) circleIconEl.textContent = "🌱";  
+
+        } else if (currentMetric === "light") {
+          heroValueEl.innerHTML  = lightVal + '<span class="metric-unit">%</span>';
+          heroLabelEl.textContent  = "Tingkat Cahaya";
+          heroStatusEl.textContent = lightStatus;
+          if (circleIconEl) circleIconEl.textContent = "💡";   
+
+        } else if (currentMetric === "motion") {
+          heroValueEl.innerHTML  = (motionVal ? "1" : "0");
+          heroLabelEl.textContent  = "Gerakan (PIR)";
+          heroStatusEl.textContent = motionStatus;
+          if (circleIconEl) circleIconEl.textContent = "🏃";  
+        }
+      }
+
+
+      // LOGIN DAN LOGOUT
+      loginBtn.addEventListener("click", () => {
+        const email = document.getElementById("email").value;
+        const pass  = document.getElementById("password").value;
+
+        signInWithEmailAndPassword(auth, email, pass)
+          .then(() => {
+            loginFormEl.style.display = "none";
+            dashboardEl.style.display = "block";
+            listenToSensors();
+          })
+          .catch(err => alert("Login gagal: " + err.message));
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        signOut(auth).then(() => {
+          const form = document.querySelector(".login-form");
+          if (form) form.reset();
+        });
+      });
+
+      // MENAMPILKAN DATA SENSOR (Realtime Database)
+      function listenToSensors() {
+        const sensorRef = ref(db, "greenhouse/sensors");
+
+        onValue(sensorRef, (snapshot) => {
+          const d = snapshot.val() || {};
+
+          updateSoil(d.soilMoisture ?? 0);
+          updateLight(d.lightLevel ?? 0);
+          updateMotion(d.motion ?? false);
+        });
+      }
+
+      function updateSoil(value) {
+        soilVal = value;
+        soilStatus = value < 30 ? "Kering" : value < 70 ? "Cukup" : "Basah";
+
+        const soilValEl    = document.getElementById("soilMoisture");
+        const soilStatusEl = document.getElementById("soilStatus");
+        if (soilValEl)    soilValEl.innerText    = value;
+        if (soilStatusEl) soilStatusEl.innerText = soilStatus;
+
+        refreshHeroByMetric();
+      }
+
+      function updateLight(value) {
+        lightVal = value;
+        lightStatus = value < 30 ? "Redup" : value < 70 ? "Cukup" : "Terang";
+
+        const lightValEl    = document.getElementById("lightLevel");
+        const lightStatusEl = document.getElementById("lightStatus");
+        if (lightValEl)    lightValEl.innerText    = value;
+        if (lightStatusEl) lightStatusEl.innerText = lightStatus;
+
+        refreshHeroByMetric();
+      }
+
+      function updateMotion(value) {
+        motionVal = value;
+        motionStatus = value ? "Ada Gerakan" : "Aman";
+
+        const motionTextEl   = document.getElementById("motionText") || document.getElementById("motion");
+        const motionStatusEl = document.getElementById("motionStatus");
+
+        if (motionTextEl)   motionTextEl.innerText   = value ? "Terdeteksi" : "Tidak Terdeteksi";
+        if (motionStatusEl) motionStatusEl.innerText = motionStatus;
+
+        refreshHeroByMetric();
+      }
+
+      document.querySelectorAll(".metric-toggle").forEach(card => {
+        card.addEventListener("click", () => {
+          currentMetric = card.dataset.metric;
+          refreshHeroByMetric();
+        });
+      });
+      refreshHeroByMetric();
+    </script>
+  </body>
+</html>
