@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Smart Plant Green House</title>
+  <title>Baby Room Monitor</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,8 +12,8 @@
 
       <section class="login-left">
         <div class="login-brand">
-          <span class="logo-mark">&#127793;</span>
-          <span class="logo-text">Smart Plant Green House</span>
+          <span class="logo-mark">👶</span>
+          <span class="logo-text">Baby Room Monitor</span>
         </div>
 
         <h1 class="login-heading">Welcome</h1>
@@ -23,21 +23,21 @@
 
         <form class="login-form" onsubmit="return false;">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Email: admin@mail.com" />
+          <input type="email" id="email" placeholder="Email address"/>
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Password: Admin123" />
+          <input type="password" id="password" placeholder="Password" />
           <button id="loginBtn" type="button">Login</button>
         </form>
       </section>
 
       <section class="login-right">
-        <img src="assets/plants.jpg" alt="plant background" class="bg-plant">
+        <img src="assets/baby1.jpg" alt="baby room background" class="bg-plant">
         <div class="visual-layer">
           <div class="visual-card">
-            <div class="visual-logo">&#127793;</div>
-            <p class="visual-title">Smart Plant</p>
+            <div class="visual-logo">👶</div>
+            <p class="visual-title">Baby Room</p>
             <p class="visual-caption">
-              Monitoring kelembaban, cahaya, dan keamanan di satu layar.
+              Monitoring suhu, kelembapan, dan kondisi kamar bayi.
             </p>
           </div>
         </div>
@@ -50,54 +50,54 @@
   <div id="dashboard" class="page page-dashboard" style="display: none;">
     <header class="dash-header">
       <div class="dash-title">
-        <h1>Smart Plant Green House</h1>
-        <h2>Monitoring Kelembaban Tanah, Cahaya, &amp; Keamanan</h2>
+        <h1>Baby Room Monitor</h1>
+        <h2>Monitoring Suhu, Kelembapan, &amp; Kondisi Kamar Bayi</h2>
       </div>
       <button id="logoutBtn" class="btn-ghost">Logout</button>
     </header>
   <main class="dash-main">
   <section class="dash-hero">
-    <img src="assets/bg-cover2.jpg" alt="Greenhouse background" class="hero-bg">
+    <img src="assets/baby1.jpg" alt="Baby room background" class="hero-bg">
 
     <div class="hero-overlay">
       <div class="metric-row">
-        <!-- KIRI: TINGKAT CAHAYA -->
-        <div class="metric-card metric-toggle" data-metric="light">
-          <div class="metric-icon">💡</div>
-          <div class="metric-title">Tingkat Cahaya</div>
+        <!-- KIRI: SUHU -->
+        <div class="metric-card metric-toggle" data-metric="temperature">
+          <div class="metric-icon">🌡️</div>
+          <div class="metric-title">Suhu Ruangan</div>
           <div class="metric-value">
-            <span id="lightLevel">0</span><span class="metric-unit">%</span>
+            <span id="temperatureValue">0</span><span class="metric-unit">°C</span>
           </div>
-          <div class="metric-status" id="lightStatus">Redup</div>
+          <div class="metric-status" id="temperatureStatus">Normal</div>
         </div>
 
-        <!-- TENGAH: KELEMBABAN TANAH -->
-        <div class="metric-card metric-toggle" data-metric="soil">
-          <div class="metric-icon">🌱</div>
-          <div class="metric-title">Kelembaban Tanah</div>
+        <!-- TENGAH: KELEMBAPAN -->
+        <div class="metric-card metric-toggle" data-metric="humidity">
+          <div class="metric-icon">💧</div>
+          <div class="metric-title">Kelembapan Udara</div>
           <div class="metric-value">
-            <span id="soilMoisture">0</span><span class="metric-unit">%</span>
+            <span id="humidityValue">0</span><span class="metric-unit">%</span>
           </div>
-          <div class="metric-status" id="soilStatus">Kering</div>
+          <div class="metric-status" id="humidityStatus">Normal</div>
         </div>
 
-        <!-- KANAN: GERAKAN (PIR) -->
-        <div class="metric-card metric-toggle" data-metric="motion">
-          <div class="metric-icon">🏃</div>
-          <div class="metric-title">Gerakan (PIR)</div>
-          <div class="metric-value" id="motionText">Tidak Terdeteksi</div>
-          <div class="metric-status" id="motionStatus">Aman</div>
+        <!-- KANAN: STATUS RUANGAN -->
+        <div class="metric-card metric-toggle" data-metric="status">
+          <div class="metric-icon">🏠</div>
+          <div class="metric-title">Status Ruangan</div>
+          <div class="metric-value" id="statusText">NYAMAN</div>
+          <div class="metric-status" id="statusDesc">Kondisi Aman</div>
         </div>
 
         <!-- LINGKARAN BESAR YANG PINDAH-PINDAH -->
         <div class="hero-circle" id="heroCircle">
           <div class="hero-circle-inner">
-            <div class="circle-icon">🌱</div>
-            <div class="circle-label" id="heroLabel">Kelembaban Tanah</div>
+            <div class="circle-icon">🌡️</div>
+            <div class="circle-label" id="heroLabel">Suhu Ruangan</div>
             <div class="circle-value" id="heroValue">
-              0<span class="metric-unit">%</span>
+              0<span class="metric-unit">°C</span>
             </div>
-            <div class="circle-chip" id="heroStatus">Kering</div>
+            <div class="circle-chip" id="heroStatus">Normal</div>
           </div>
         </div>
       </div>
@@ -107,26 +107,25 @@
     <!-- ROW KARTU DI BAWAH-->
     <section class="dash-grid">
       <article class="dash-card">
-        <h3>Tanah &amp; Irigasi</h3>
+        <h3>Suhu &amp; Kenyamanan</h3>
         <p>
-          Nilai kelembaban tanah digunakan untuk mengatur penyiraman otomatis
-          dan mencegah tanaman kekeringan.
+          Suhu ideal untuk bayi adalah 18-30°C.
         </p>
       </article>
 
       <article class="dash-card">
-        <h3>Cahaya &amp; Pencahayaan</h3>
+        <h3>Kelembapan Udara</h3>
         <p>
-          Tingkat cahaya membantu menentukan kapan lampu grow-light perlu
-          dinyalakan atau dimatikan.
+          Kelembapan optimal untuk kenyamanan bayi adalah 40-60%. <br>Udara yang
+          terlalu kering atau lembap dapat mengganggu pernapasan bayi.
         </p>
       </article>
 
       <article class="dash-card">
-        <h3>Keamanan &amp; Gerakan</h3>
+        <h3>Status &amp; Peringatan</h3>
         <p>
-          Sensor PIR memantau adanya gerakan hewan atau orang di sekitar
-          greenhouse untuk keamanan.
+          LED akan aktif jika kondisi tidak aman.<br> Hijau = Nyaman,
+          Kuning = Waspada, Merah = Bahaya.
         </p>
       </article>
     </section>
@@ -135,7 +134,7 @@
 
     <footer class="dash-footer">
       <p>
-        Smart Plant Green House &mdash; Dashboard monitoring berbasis
+        Baby Room Monitor &mdash; Dashboard monitoring berbasis
         Firebase Realtime Database.
       </p>
     </footer>
@@ -191,15 +190,15 @@
       });
 
       // ====== STATE & FUNGSI UNTUK LINGKARAN HERO ======
-      let currentMetric = "soil"; 
-      let soilVal = 0;
-      let soilStatus = "Kering";
+      let currentMetric = "temperature"; 
+      let tempVal = 0;
+      let tempStatus = "Normal";
 
-      let lightVal = 0;
-      let lightStatus = "Redup";
+      let humidityVal = 0;
+      let humidityStatus = "Normal";
 
-      let motionVal = false;
-      let motionStatus = "Aman";
+      let statusVal = "NYAMAN";
+      let statusDesc = "Kondisi Aman";
 
       const heroCircle   = document.getElementById("heroCircle");
       const heroValueEl  = document.getElementById("heroValue");
@@ -209,17 +208,17 @@
       function moveCircleTo(metric) {
         if (!heroCircle) return;
 
-        if (metric === "light") {
+        if (metric === "temperature") {
           heroCircle.style.left = "16%";
-        } else if (metric === "soil") {
+        } else if (metric === "humidity") {
           heroCircle.style.left = "50%";
-        } else if (metric === "motion") {
+        } else if (metric === "status") {
           heroCircle.style.left = "84%";
         }
       }
 
       function refreshHeroByMetric() {
-        currentMetric = currentMetric || "soil";
+        currentMetric = currentMetric || "temperature";
 
         document.querySelectorAll(".metric-toggle").forEach(card => {
           card.classList.toggle("active", card.dataset.metric === currentMetric);
@@ -232,23 +231,23 @@
         // AMBIL ELEMEN ICON DI LINGKARAN
         const circleIconEl = document.querySelector(".circle-icon"); 
 
-        if (currentMetric === "soil") {
-          heroValueEl.innerHTML  = soilVal + '<span class="metric-unit">%</span>';
-          heroLabelEl.textContent  = "Kelembaban Tanah";
-          heroStatusEl.textContent = soilStatus;
-          if (circleIconEl) circleIconEl.textContent = "🌱";  
+        if (currentMetric === "temperature") {
+          heroValueEl.innerHTML  = tempVal + '<span class="metric-unit">°C</span>';
+          heroLabelEl.textContent  = "Suhu Ruangan";
+          heroStatusEl.textContent = tempStatus;
+          if (circleIconEl) circleIconEl.textContent = "🌡️";  
 
-        } else if (currentMetric === "light") {
-          heroValueEl.innerHTML  = lightVal + '<span class="metric-unit">%</span>';
-          heroLabelEl.textContent  = "Tingkat Cahaya";
-          heroStatusEl.textContent = lightStatus;
-          if (circleIconEl) circleIconEl.textContent = "💡";   
+        } else if (currentMetric === "humidity") {
+          heroValueEl.innerHTML  = humidityVal + '<span class="metric-unit">%</span>';
+          heroLabelEl.textContent  = "Kelembapan Udara";
+          heroStatusEl.textContent = humidityStatus;
+          if (circleIconEl) circleIconEl.textContent = "💧";   
 
-        } else if (currentMetric === "motion") {
-          heroValueEl.innerHTML  = (motionVal ? "1" : "0");
-          heroLabelEl.textContent  = "Gerakan (PIR)";
-          heroStatusEl.textContent = motionStatus;
-          if (circleIconEl) circleIconEl.textContent = "🏃";  
+        } else if (currentMetric === "status") {
+          heroValueEl.innerHTML  = statusVal;
+          heroLabelEl.textContent  = "Status Ruangan";
+          heroStatusEl.textContent = statusDesc;
+          if (circleIconEl) circleIconEl.textContent = "🏠";  
         }
       }
 
@@ -276,50 +275,78 @@
 
       // MENAMPILKAN DATA SENSOR (Realtime Database)
       function listenToSensors() {
-        const sensorRef = ref(db, "greenhouse/sensors");
+        const sensorRef = ref(db, "iot");
 
         onValue(sensorRef, (snapshot) => {
           const d = snapshot.val() || {};
 
-          updateSoil(d.soilMoisture ?? 0);
-          updateLight(d.lightLevel ?? 0);
-          updateMotion(d.motion ?? false);
+          updateTemperature(d.temperature ?? 0);
+          updateHumidity(d.humidity ?? 0);
+          updateStatus(d.status ?? "NYAMAN");
         });
       }
 
-      function updateSoil(value) {
-        soilVal = value;
-        soilStatus = value < 30 ? "Kering" : value < 70 ? "Cukup" : "Basah";
+      function updateTemperature(value) {
+        tempVal = value;
+        
+        // Status berdasarkan suhu ideal bayi
+        if (value < 18 || value > 30) {
+          tempStatus = "Bahaya";
+        } else if (value >= 18 && value <= 20) {
+          tempStatus = "Sejuk";
+        } else if (value >= 21 && value <= 27) {
+          tempStatus = "Optimal";
+        } else {
+          tempStatus = "Hangat";
+        }
 
-        const soilValEl    = document.getElementById("soilMoisture");
-        const soilStatusEl = document.getElementById("soilStatus");
-        if (soilValEl)    soilValEl.innerText    = value;
-        if (soilStatusEl) soilStatusEl.innerText = soilStatus;
-
-        refreshHeroByMetric();
-      }
-
-      function updateLight(value) {
-        lightVal = value;
-        lightStatus = value < 30 ? "Redup" : value < 70 ? "Cukup" : "Terang";
-
-        const lightValEl    = document.getElementById("lightLevel");
-        const lightStatusEl = document.getElementById("lightStatus");
-        if (lightValEl)    lightValEl.innerText    = value;
-        if (lightStatusEl) lightStatusEl.innerText = lightStatus;
+        const tempValEl    = document.getElementById("temperatureValue");
+        const tempStatusEl = document.getElementById("temperatureStatus");
+        if (tempValEl)    tempValEl.innerText    = value;
+        if (tempStatusEl) tempStatusEl.innerText = tempStatus;
 
         refreshHeroByMetric();
       }
 
-      function updateMotion(value) {
-        motionVal = value;
-        motionStatus = value ? "Ada Gerakan" : "Aman";
+      function updateHumidity(value) {
+        humidityVal = value;
+        
+        // Status berdasarkan kelembapan ideal bayi
+        if (value < 30 || value > 70) {
+          humidityStatus = "Bahaya";
+        } else if (value >= 30 && value < 40) {
+          humidityStatus = "Rendah";
+        } else if (value >= 40 && value <= 60) {
+          humidityStatus = "Optimal";
+        } else {
+          humidityStatus = "Tinggi";
+        }
 
-        const motionTextEl   = document.getElementById("motionText") || document.getElementById("motion");
-        const motionStatusEl = document.getElementById("motionStatus");
+        const humidityValEl    = document.getElementById("humidityValue");
+        const humidityStatusEl = document.getElementById("humidityStatus");
+        if (humidityValEl)    humidityValEl.innerText    = value;
+        if (humidityStatusEl) humidityStatusEl.innerText = humidityStatus;
 
-        if (motionTextEl)   motionTextEl.innerText   = value ? "Terdeteksi" : "Tidak Terdeteksi";
-        if (motionStatusEl) motionStatusEl.innerText = motionStatus;
+        refreshHeroByMetric();
+      }
+
+      function updateStatus(value) {
+        statusVal = value;
+        
+        // Deskripsi status dari ESP32
+        if (value === "BAHAYA") {
+          statusDesc = "Kondisi Berbahaya";
+        } else if (value === "WASPADA") {
+          statusDesc = "Perlu Perhatian";
+        } else {
+          statusDesc = "Kondisi Aman";
+        }
+
+        const statusTextEl = document.getElementById("statusText");
+        const statusDescEl = document.getElementById("statusDesc");
+        
+        if (statusTextEl) statusTextEl.innerText = value;
+        if (statusDescEl) statusDescEl.innerText = statusDesc;
 
         refreshHeroByMetric();
       }

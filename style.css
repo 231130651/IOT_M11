@@ -58,14 +58,14 @@ body {
 }
 
 .logo-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(#7c5215, #3b2a1b);
-  font-size: 1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f87bca, #ed42af 100%);
+    font-size: 1rem;
 }
 
 .logo-text {
@@ -121,7 +121,7 @@ body {
 }
 
 .login-form button {
-  background: url("assets/wood.jpg");
+  background: url("assets/pink1.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 24px;
@@ -209,7 +209,9 @@ body {
   justify-content: center;
   font-weight: 700;
   font-size: 1.8rem;
-  background: linear-gradient(135deg, #7c5215, #3b2a1b);
+  background: linear-gradient(135deg, #f87bca, #ed42af 100%);
+color: #ffffff;
+;
   color: #4d311f;
 }
 
@@ -272,7 +274,7 @@ body {
   padding: 0.55rem 1.2rem;
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.8);
-  background: linear-gradient(135deg, #6E4A2B, #3B2A1B);
+  background: linear-gradient(135deg, #f87bca, #ed42af);
   color: #ffffff;
   font-size: 0.82rem;
   font-weight: 500;
@@ -394,7 +396,7 @@ body {
 }
 
 .metric-value {
-  font-size: 24px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
 }
@@ -410,7 +412,7 @@ body {
   opacity: 0.9;
 }
 
-#motionText {
+#statusText {
   font-size: 18px;
   font-weight: 400;
 }
@@ -425,7 +427,7 @@ body {
   height: 220px;
   border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.9);
-  background: linear-gradient(135deg, #3e2f21 0%,#2f2418 100%);
+  background: linear-gradient(135deg, #f87bca, #ed42af 100%);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
   display: flex;
   align-items: center;
@@ -444,7 +446,7 @@ body {
 }
 
 .circle-value {
-  font-size: 44px;
+  font-size: 26px;
   font-weight: 700;
 }
 
@@ -541,4 +543,10 @@ body {
   .login-left {
     padding-inline: 1.8rem;
   }
+}
+
+.hero-circle .circle-value {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.2;
 }
